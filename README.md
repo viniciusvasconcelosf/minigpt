@@ -1,8 +1,6 @@
-# microgpt com Nomes Brasileiros
+# minigpt gerador de nomes brasileiros por inferencia
 
-Projeto simples feito como aluno, inspirado no **microgpt** do Andrej Karpathy.
-
-O objetivo é entender, da forma mais mínima possível, como funciona um GPT:
+O objetivo é entender, da forma mais mínima possível, como funciona o treinamento de um LLM:
 - dataset de texto
 - tokenizer
 - rede neural (transformer bem pequeno)
@@ -11,27 +9,27 @@ O objetivo é entender, da forma mais mínima possível, como funciona um GPT:
 - treinamento
 - geração de texto novo
 
-Tudo em **um único arquivo Python**, sem nenhuma biblioteca externa (só a biblioteca padrão).
+Tudo em **um único arquivo Python**, sem nenhuma biblioteca externa.
 
 ## O que o programa faz?
 
-1. Carrega uma lista de nomes brasileiros (arquivo `nomes_br.txt`).
-2. Treina um modelo minúsculo de linguagem para aprender a "escrever" nomes parecidos.
-3. No final, gera nomes novos (alguns reais, alguns inventados, mas com cara de nome brasileiro).
+1. carrega uma lista de nomes brasileiros (arquivo `nomes_br.txt`).
+2. treina um modelo minúsculo de linguagem para aprender a "escrever" nomes parecidos.
+3. no final, gera nomes novos (alguns reais, alguns inventados, seguindo o padrão de nomes brasileiros).
 
-## Como rodar
+## como rodar
 
 ```bash
-python microgpt.py
+python minigpt.py
 ```
 
 O script vai:
-- Baixar a lista de nomes (se ainda não existir)
-- Treinar por cerca de 800 passos (leva alguns minutos)
-- Mostrar a loss diminuindo
-- Gerar 20 nomes no final
+- baixar a lista de nomes (se ainda não existir)
+- treinar em alguns passos (configuravel no arquivo)
+- calcular o loss durante o loop de treinamento
+- gerar 20 nomes de exemplo
 
-## Estrutura do código (bem resumida)
+## Estrutura do código resumida
 
 | Parte              | O que faz                                      |
 |--------------------|------------------------------------------------|
@@ -44,24 +42,16 @@ O script vai:
 | Loop de treino     | Passa nomes, calcula loss, atualiza pesos      |
 | Inferência         | Gera nomes novos letra por letra               |
 
-## Por que é interessante?
 
-Você vê **todo o algoritmo** de um GPT em ~250 linhas:
-- Sem PyTorch
-- Sem CUDA
-- Sem truques
+você vê **todo o algoritmo** de uma LLM em ~220 linhas:
+- sem PyTorch
+- sem CUDA
+- sem truques
 
-É a versão "essência" do que modelos grandes fazem, só que minúscula e legível.
+versão "essência" do que modelos grandes fazem, só que minúscula e legível.
 
 ## Observações
 
-- O modelo é propositalmente pequeno (`n_embd=16`, 1 camada) para treinar rápido no CPU.
-- Nomes com acento foram filtrados para manter o vocabulário simples (só a-z).
-- A qualidade dos nomes gerados não é perfeita (é um modelo bem pequeno), mas já dá para ver o padrão sendo aprendido.
-
-## Créditos
-
-- Ideia e arquitetura original: [Andrej Karpathy - microgpt](https://karpathy.github.io/2026/02/12/microgpt/)
-- Lista de nomes: baseada em dados públicos brasileiros
-
-Feito de forma simples, só para estudar e brincar. 🇧🇷
+- o modelo é propositalmente pequeno para treinar rápido no CPU.
+- a qualidade dos nomes gerados não é perfeita (é um modelo bem pequeno), mas já dá para ver o padrão sendo aprendido.
+- lista de nomes: baseada em dados públicos brasileiros
